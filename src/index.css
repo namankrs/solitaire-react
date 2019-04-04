@@ -12,3 +12,49 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.card {
+  font-size: 150px;
+  height: 140px;
+  margin: -30px;
+  background: white;
+  border: 1px solid black;
+}
+
+.top-layer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.foundation-pile {
+  height: 150px;
+  width: 100px;
+  border: 1px solid black;
+  margin: 2px;
+}
+
+.waste-pile,
+.faced-up-waste-pile {
+  font-size: 150px;
+  margin-top: -40px;
+}
+
+.waste-piles {
+  display: flex;
+}
+
+.foundation-piles {
+  display: flex;
+}
+
+.piles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.pile-column {
+  display: flex;
+  flex-direction: column;
+}
