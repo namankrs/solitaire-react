@@ -14,18 +14,6 @@ code {
     monospace;
 }
 
-.card {
-  font-size: 185px;
-  height: 180px;
-  width: 150px;
-  margin: -30px;
-  background: whitesmoke;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .top-layer {
   display: flex;
   justify-content: space-between;
@@ -36,8 +24,8 @@ code {
   justify-content: center;
   font-size: 150px;
   margin: 2px;
-  height: 150px;
-  width: 100px;
+  height: 180px;
+  width: 150px;
   border: 1px solid black;
 }
 
@@ -61,9 +49,10 @@ code {
   flex-direction: column;
 }
 
+.foundation-pile-card,
 .waste-pile-card {
   position: absolute;
-  clip: rect(40px, 100px, 180px, 5px);
+  clip: rect(40px, 130px, 210px, 5px);
   background: whitesmoke;
   border: 1px solid black;
   margin-top: -30px;
@@ -73,9 +62,21 @@ code {
 .faced-up-waste-pile {
   display: flex;
   justify-content: center;
-  font-size: 150px;
+  font-size: 185px;
   margin: 2px;
-  height: 150px;
-  width: 100px;
+  height: 180px;
+  width: 150px;
   border: 1px solid black;
+}
+
+.card {
+  font-size: 185px;
+  height: 180px;
+  width: 150px;
+  margin: -30px;
+  background: whitesmoke;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
