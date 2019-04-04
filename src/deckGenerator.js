@@ -1,4 +1,5 @@
 import Card from "./Card";
+import { shuffle } from "lodash";
 
 function deckGenerator() {
   const suites = {
@@ -14,11 +15,11 @@ function deckGenerator() {
     const unicodePrefix = suites[suite].unicode;
     for (let cardNumber = 1; cardNumber <= 14; cardNumber++) {
       let unicode = unicodePrefix + cardNumber.toString(16);
-      if (cardNumber == 12) continue;
+      if (cardNumber === 12) continue;
       deck.push(new Card(suite, color, cardNumber, unicode));
     }
   });
-  return deck;
+  return shuffle(deck);
 }
 
 export default deckGenerator;

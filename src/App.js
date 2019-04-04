@@ -1,60 +1,87 @@
 import React, { Component } from "react";
 import "./App.css";
 import deckGenerator from "./deckGenerator";
-import { shuffle } from "lodash";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { facedUpwastePile: [], wastePile: [] };
+    this.state = {
+      piles: [],
+      wastePiles: { 1: [], 2: [] },
+      foundationPiles: { 1: [], 2: [], 3: [], 4: [] }
+    };
   }
 
-  generatePiles(pilesStack) {
-    const stackCopy = pilesStack.slice(0);
+  componentDidMount() {
+    this.setStates();
+  }
+
+  setStates() {
+    const deck = deckGenerator();
+    const deckCopy = deck.slice(0);
     const piles = [];
     for (let pileCount = 1; pileCount <= 7; pileCount++) {
       const pile = [];
       for (let cardCount = 0; cardCount < pileCount; cardCount++) {
-        pile.push(
-          <div
-            className="card"
-            style={{ color: stackCopy[0].color }}
-            dangerouslySetInnerHTML={{
-              __html: `${stackCopy[0].getUnicode()}`
-            }}
-          />
-        );
-        stackCopy.shift();
+        pile.push(deckCopy[0]);
+        deckCopy.shift();
       }
-      piles.push(<div className="pile-column">{pile}</div>);
+      piles.push(pile);
     }
-    return piles;
+    const wastePiles = { 1: deckCopy, 2: [] };
+    this.setState({ piles: piles, wastePiles: wastePiles });
   }
 
-  generateDeck() {
-    const deck = deckGenerator();
-    const shuffledDeck = shuffle(deck);
-    const pilesStack = shuffledDeck.slice(0, 28);
-    const wastePile = shuffledDeck.slice(28);
-    const cards = this.generatePiles(pilesStack);
-    return cards;
+  generatePiles() {
+    const toRenderPiles = this.state.piles.map(pile => {
+      const toRenderPile = pile.map(card => (
+        <div
+          className="card"
+          style={{ color: card.color }}
+          dangerouslySetInnerHTML={{
+            __html: `${card.getUnicode()}`
+          }}
+        />
+      ));
+      return <div className="pile-column"> {toRenderPile}</div>;
+    });
+    return toRenderPiles;
   }
 
   handleWastePile() {}
 
   generateWastePiles() {
-    return (
-      <div className="waste-piles">
+    const wastePiles = this.state.wastePiles;
+    const toRenderWastePiles = Object.keys(wastePiles).map(wastePile => {
+      const toRenderPile = wastePiles[wastePile].map(card => (
         <div
-          className="waste-pile"
-          onClick={this.handleWastePile}
+          className="waste-pile-card"
+          style={{ color: card.color }}
           dangerouslySetInnerHTML={{
-            __html: "&#X1F0A0"
+            __html: `${card.getUnicode()}`
           }}
         />
-        <div className="faced-up-waste-pile" />
-      </div>
-    );
+      ));
+      return <div className="waste-pile">{toRenderPile}</div>;
+    });
+    return <div className="waste-piles">{toRenderWastePiles}</div>;
+  }
+
+  generateFoundationPiles() {
+    const foundationPiles = this.state.foundationPiles;
+    const toRenderPiles = Object.keys(foundationPiles).map(foundationPile => {
+      const toRenderPile = foundationPiles[foundationPile].map(card => (
+        <div
+          className="foundation-pile-card"
+          style={{ color: card.color }}
+          dangerouslySetInnerHTML={{
+            __html: `${card.getUnicode()}`
+          }}
+        />
+      ));
+      return <div className="foundation-pile">{toRenderPile}</div>;
+    });
+    return <div className="foundation-piles">{toRenderPiles}</div>;
   }
 
   render() {
@@ -62,15 +89,9 @@ class App extends Component {
       <div className="container">
         <div className="top-layer">
           {this.generateWastePiles()}
-          {/* <div className="waste-piles" /> */}
-          <div className="foundation-piles">
-            <div className="foundation-pile" />
-            <div className="foundation-pile" />
-            <div className="foundation-pile" />
-            <div className="foundation-pile" />
-          </div>
+          {this.generateFoundationPiles()}
         </div>
-        <div className="piles"> {this.generateDeck()}</div>
+        <div className="piles"> {this.generatePiles()}</div>
       </div>
     );
   }

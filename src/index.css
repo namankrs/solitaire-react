@@ -1,4 +1,5 @@
 body {
+  background: whitesmoke;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -14,11 +15,15 @@ code {
 }
 
 .card {
-  font-size: 150px;
-  height: 140px;
+  font-size: 185px;
+  height: 180px;
+  width: 150px;
   margin: -30px;
-  background: white;
+  background: whitesmoke;
   border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .top-layer {
@@ -27,16 +32,13 @@ code {
 }
 
 .foundation-pile {
+  display: flex;
+  justify-content: center;
+  font-size: 150px;
+  margin: 2px;
   height: 150px;
   width: 100px;
   border: 1px solid black;
-  margin: 2px;
-}
-
-.waste-pile,
-.faced-up-waste-pile {
-  font-size: 150px;
-  margin-top: -40px;
 }
 
 .waste-piles {
@@ -57,4 +59,23 @@ code {
 .pile-column {
   display: flex;
   flex-direction: column;
+}
+
+.waste-pile-card {
+  position: absolute;
+  clip: rect(40px, 100px, 180px, 5px);
+  background: whitesmoke;
+  border: 1px solid black;
+  margin-top: -30px;
+}
+
+.waste-pile,
+.faced-up-waste-pile {
+  display: flex;
+  justify-content: center;
+  font-size: 150px;
+  margin: 2px;
+  height: 150px;
+  width: 100px;
+  border: 1px solid black;
 }
