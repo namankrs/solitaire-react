@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import deckGenerator from "./deckGenerator";
-import Card from "./Card";
+import PilesView from "./PilesView";
 
 class App extends Component {
   constructor(props) {
@@ -45,35 +45,6 @@ class App extends Component {
     piles[dragPileIndex] = remainingCards;
     piles[toDropPileIndex] = piles[toDropPileIndex].concat(draggedCards);
     this.setState({ piles: piles });
-  }
-
-  dragFromPile(event) {
-    event.dataTransfer.setData("text", event.target.id);
-  }
-
-  allowDrop(event) {
-    event.preventDefault();
-  }
-
-  generatePiles() {
-    const toRenderPiles = this.state.piles.map((pile, pileIndex) => {
-      const toRenderPile = pile.map((card, cardIndex) => (
-        <div
-          id={pileIndex + "_" + cardIndex}
-          draggable={true}
-          onDrop={this.dropOnPile.bind(this)}
-          onDragStart={this.dragFromPile.bind(this)}
-          onDragOver={this.allowDrop.bind(this)}
-          className="card"
-          style={{ color: card.color }}
-          dangerouslySetInnerHTML={{
-            __html: `${card.getUnicode()}`
-          }}
-        />
-      ));
-      return <div className="pile-column"> {toRenderPile}</div>;
-    });
-    return toRenderPiles;
   }
 
   resetWastePile() {
@@ -158,7 +129,10 @@ class App extends Component {
           {this.generateWastePiles()}
           {this.generateFoundationPiles()}
         </div>
-        <div className="piles"> {this.generatePiles()}</div>
+        <PilesView
+          piles={this.state.piles}
+          dropOnPile={this.dropOnPile.bind(this)}
+        />
       </div>
     );
   }
