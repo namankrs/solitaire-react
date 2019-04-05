@@ -41,21 +41,14 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .pile-column {
   display: flex;
   flex-direction: column;
-}
-
-.foundation-pile-card,
-.waste-pile-card {
-  position: absolute;
-  clip: rect(40px, 130px, 210px, 5px);
-  background: whitesmoke;
-  border: 1px solid black;
-  margin-top: -30px;
+  width: 150px;
+  height: 100px;
 }
 
 .waste-pile,
@@ -80,4 +73,13 @@ code {
   align-items: center;
   justify-content: center;
   border-radius: 4%;
+}
+
+.foundation-pile-card,
+.waste-pile-card {
+  position: absolute;
+  clip: rect(40px, 130px, 210px, 5px);
+  background: whitesmoke;
+  border: 1px solid black;
+  margin-top: -30px;
 }

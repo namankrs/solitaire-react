@@ -1,32 +1,39 @@
 import React from "react";
+import CardView from "./CardView";
 
 class PilesView extends React.Component {
-  dragFromPile(event) {
-    event.dataTransfer.setData("text", event.target.id);
-  }
-
   allowDrop(event) {
     event.preventDefault();
   }
 
+  generateCard(pileIndex, card, cardIndex) {
+    return (
+      <CardView
+        id={pileIndex + "_" + cardIndex}
+        draggable={true}
+        className="card"
+        card={card}
+      />
+    );
+  }
+
+  generatePile(pileIndex, toRenderPile) {
+    return (
+      <div
+        id={pileIndex}
+        onDragOver={this.allowDrop.bind(this)}
+        onDrop={this.props.dropOnPile.bind(null, pileIndex)}
+        className="pile-column"
+      >
+        {toRenderPile}
+      </div>
+    );
+  }
+
   render() {
     const toRenderPiles = this.props.piles.map((pile, pileIndex) => {
-      const toRenderPile = pile.map((card, cardIndex) => (
-        <div
-          key={pileIndex + "_" + cardIndex}
-          id={pileIndex + "_" + cardIndex}
-          draggable={true}
-          onDrop={this.props.dropOnPile.bind(this)}
-          onDragStart={this.dragFromPile.bind(this)}
-          onDragOver={this.allowDrop.bind(this)}
-          className="card"
-          style={{ color: card.color }}
-          dangerouslySetInnerHTML={{
-            __html: `${card.getUnicode()}`
-          }}
-        />
-      ));
-      return <div className="pile-column"> {toRenderPile}</div>;
+      const toRenderPile = pile.map(this.generateCard.bind(null, pileIndex));
+      return this.generatePile(pileIndex, toRenderPile);
     });
     return <div className="piles"> {toRenderPiles}</div>;
   }

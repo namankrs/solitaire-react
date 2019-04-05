@@ -34,17 +34,16 @@ class GameView extends Component {
     this.setState({ piles: piles, wastePiles: wastePiles });
   }
 
-  dropOnPile(event) {
+  dropOnPile(pileIndex, event) {
     event.preventDefault();
     const toDropCardIndexes = event.dataTransfer.getData("text").split("_");
     const dragPileIndex = toDropCardIndexes[0];
     const dragCardIndex = toDropCardIndexes[1];
-    const toDropPileIndex = event.target.id.split("_")[0];
     const piles = this.state.piles;
     const draggedCards = piles[dragPileIndex].slice(dragCardIndex);
     const remainingCards = piles[dragPileIndex].slice(0, dragCardIndex);
     piles[dragPileIndex] = remainingCards;
-    piles[toDropPileIndex] = piles[toDropPileIndex].concat(draggedCards);
+    piles[pileIndex] = piles[pileIndex].concat(draggedCards);
     this.setState({ piles: piles });
   }
 
@@ -68,6 +67,7 @@ class GameView extends Component {
     event.preventDefault();
     const toDropCardIndexes = event.dataTransfer.getData("text");
     console.log(toDropCardIndexes);
+    console.log(event.target.id);
   }
 
   render() {

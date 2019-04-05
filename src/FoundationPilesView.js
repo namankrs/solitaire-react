@@ -1,13 +1,34 @@
 import React from "react";
+import CardView from "./CardView";
 
 class FoundationPilesView extends React.Component {
-  dragFromFoundationPile(event) {
-    console.log(event.target.id);
-    event.dataTransfer.setData("text", event.target.id);
-  }
-
   allowDrop(event) {
     event.preventDefault();
+  }
+
+  generateCard(pileIndex, card, cardIndex) {
+    return (
+      <CardView
+        id={pileIndex + "_" + cardIndex}
+        draggable={true}
+        onDragStart={this.dragFromFoundationPile.bind(this)}
+        className="foundation-pile-card"
+        card={card}
+      />
+    );
+  }
+
+  generateFoundation(pileIndex, toRenderPile) {
+    return (
+      <div
+        id={pileIndex}
+        onDragOver={this.allowDrop.bind(this)}
+        onDrop={this.props.dropOnFoundationPile}
+        className="foundation-pile"
+      >
+        {toRenderPile}
+      </div>
+    );
   }
 
   render() {
@@ -15,22 +36,8 @@ class FoundationPilesView extends React.Component {
     const toRenderPiles = Object.keys(foundationPiles).map(
       (foundationPile, pileIndex) => {
         const pile = foundationPiles[foundationPile];
-        const toRenderPile = pile.map((card, cardIndex) => (
-          <div
-            key={pileIndex + "_" + cardIndex}
-            id={pileIndex + "_" + cardIndex}
-            draggable={true}
-            onDrop={this.props.dropOnFoundationPile}
-            onDragStart={this.dragFromFoundationPile.bind(this)}
-            onDragOver={this.allowDrop.bind(this)}
-            className="foundation-pile-card"
-            style={{ color: card.color }}
-            dangerouslySetInnerHTML={{
-              __html: `${card.getUnicode()}`
-            }}
-          />
-        ));
-        return <div className="foundation-pile">{toRenderPile}</div>;
+        const toRenderPile = pile.map(this.generateCard.bind(null, pileIndex));
+        return this.generateFoundation(pileIndex, toRenderPile);
       }
     );
     return <div className="foundation-piles">{toRenderPiles}</div>;
