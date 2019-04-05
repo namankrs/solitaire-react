@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import deckGenerator from "./deckGenerator";
 import PilesView from "./PilesView";
 import FoundationPilesView from "./FoundationPilesView";
+import WastePilesView from "./WastePilesView";
 
 class GameView extends Component {
   constructor(props) {
@@ -63,29 +64,6 @@ class GameView extends Component {
     this.setState({ wastePiles: { 1: wastePile, 2: faceOnWastePile } });
   }
 
-  generateWastePiles() {
-    const wastePiles = this.state.wastePiles;
-    const toRenderWastePiles = Object.keys(wastePiles).map(
-      (wastePile, index) => {
-        let onclick = this.resetWastePile.bind(this);
-        if (index === 0) onclick = this.handleWastePile.bind(this);
-
-        const toRenderPile = wastePiles[wastePile].map(card => (
-          <div
-            onClick={onclick}
-            className="waste-pile-card"
-            style={{ color: card.color }}
-            dangerouslySetInnerHTML={{
-              __html: `${card.getUnicode()}`
-            }}
-          />
-        ));
-        return <div className="waste-pile">{toRenderPile}</div>;
-      }
-    );
-    return <div className="waste-piles">{toRenderWastePiles}</div>;
-  }
-
   dropOnFoundationPile(event) {
     event.preventDefault();
     const toDropCardIndexes = event.dataTransfer.getData("text");
@@ -96,12 +74,15 @@ class GameView extends Component {
     return (
       <div className="container">
         <div className="top-layer">
-          {this.generateWastePiles()}
+          <WastePilesView
+            wastePiles={this.state.wastePiles}
+            resetWastePile={this.resetWastePile.bind(this)}
+            handleWastePile={this.handleWastePile.bind(this)}
+          />
           <FoundationPilesView
             foundationPiles={this.state.foundationPiles}
             dropOnFoundationPile={this.dropOnFoundationPile.bind(this)}
           />
-          {/* {this.generateFoundationPiles()} */}
         </div>
         <PilesView
           piles={this.state.piles}

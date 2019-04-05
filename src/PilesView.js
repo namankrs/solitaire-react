@@ -1,10 +1,6 @@
 import React from "react";
 
 class PilesView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   dragFromPile(event) {
     event.dataTransfer.setData("text", event.target.id);
   }
@@ -17,6 +13,7 @@ class PilesView extends React.Component {
     const toRenderPiles = this.props.piles.map((pile, pileIndex) => {
       const toRenderPile = pile.map((card, cardIndex) => (
         <div
+          key={pileIndex + "_" + cardIndex}
           id={pileIndex + "_" + cardIndex}
           draggable={true}
           onDrop={this.props.dropOnPile.bind(this)}
