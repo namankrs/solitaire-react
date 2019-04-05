@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import deckGenerator from "./deckGenerator";
 import PilesView from "./PilesView";
+import FoundationPilesView from "./FoundationPilesView";
 
 class GameView extends Component {
   constructor(props) {
@@ -85,40 +86,10 @@ class GameView extends Component {
     return <div className="waste-piles">{toRenderWastePiles}</div>;
   }
 
-  dragFromFoundationPile(event) {
-    console.log(event.target.id);
-    event.dataTransfer.setData("text", event.target.id);
-  }
-
   dropOnFoundationPile(event) {
     event.preventDefault();
     const toDropCardIndexes = event.dataTransfer.getData("text");
     console.log(toDropCardIndexes);
-  }
-
-  generateFoundationPiles() {
-    const foundationPiles = this.state.foundationPiles;
-    const toRenderPiles = Object.keys(foundationPiles).map(
-      (foundationPile, pileIndex) => {
-        const pile = foundationPiles[foundationPile];
-        const toRenderPile = pile.map((card, cardIndex) => (
-          <div
-            id={pileIndex + "_" + cardIndex}
-            draggable={true}
-            onDrop={this.dropOnFoundationPile.bind(this)}
-            onDragStart={this.dragFromFoundationPile.bind(this)}
-            onDragOver={this.allowDrop.bind(this)}
-            className="foundation-pile-card"
-            style={{ color: card.color }}
-            dangerouslySetInnerHTML={{
-              __html: `${card.getUnicode()}`
-            }}
-          />
-        ));
-        return <div className="foundation-pile">{toRenderPile}</div>;
-      }
-    );
-    return <div className="foundation-piles">{toRenderPiles}</div>;
   }
 
   render() {
@@ -126,7 +97,11 @@ class GameView extends Component {
       <div className="container">
         <div className="top-layer">
           {this.generateWastePiles()}
-          {this.generateFoundationPiles()}
+          <FoundationPilesView
+            foundationPiles={this.state.foundationPiles}
+            dropOnFoundationPile={this.dropOnFoundationPile.bind(this)}
+          />
+          {/* {this.generateFoundationPiles()} */}
         </div>
         <PilesView
           piles={this.state.piles}
