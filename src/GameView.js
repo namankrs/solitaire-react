@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import "./App.css";
 import deckGenerator from "./deckGenerator";
 import PilesView from "./PilesView";
 
-class App extends Component {
+class GameView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -138,4 +137,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default GameView;
