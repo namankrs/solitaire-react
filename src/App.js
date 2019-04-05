@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import deckGenerator from "./deckGenerator";
+import Card from "./Card";
 
 class App extends Component {
   constructor(props) {
@@ -32,10 +33,37 @@ class App extends Component {
     this.setState({ piles: piles, wastePiles: wastePiles });
   }
 
+  dropOnPile(event) {
+    event.preventDefault();
+    const toDropCardIndexes = event.dataTransfer.getData("text").split("_");
+    const dragPileIndex = toDropCardIndexes[0];
+    const dragCardIndex = toDropCardIndexes[1];
+    const toDropPileIndex = event.target.id.split("_")[0];
+    const piles = this.state.piles;
+    const draggedCards = piles[dragPileIndex].slice(dragCardIndex);
+    const remainingCards = piles[dragPileIndex].slice(0, dragCardIndex);
+    piles[dragPileIndex] = remainingCards;
+    piles[toDropPileIndex] = piles[toDropPileIndex].concat(draggedCards);
+    this.setState({ piles: piles });
+  }
+
+  dragFromPile(event) {
+    event.dataTransfer.setData("text", event.target.id);
+  }
+
+  allowDrop(event) {
+    event.preventDefault();
+  }
+
   generatePiles() {
-    const toRenderPiles = this.state.piles.map(pile => {
-      const toRenderPile = pile.map(card => (
+    const toRenderPiles = this.state.piles.map((pile, pileIndex) => {
+      const toRenderPile = pile.map((card, cardIndex) => (
         <div
+          id={pileIndex + "_" + cardIndex}
+          draggable={true}
+          onDrop={this.dropOnPile.bind(this)}
+          onDragStart={this.dragFromPile.bind(this)}
+          onDragOver={this.allowDrop.bind(this)}
           className="card"
           style={{ color: card.color }}
           dangerouslySetInnerHTML={{
@@ -87,20 +115,39 @@ class App extends Component {
     return <div className="waste-piles">{toRenderWastePiles}</div>;
   }
 
+  dragFromFoundationPile(event) {
+    console.log(event.target.id);
+    event.dataTransfer.setData("text", event.target.id);
+  }
+
+  dropOnFoundationPile(event) {
+    event.preventDefault();
+    const toDropCardIndexes = event.dataTransfer.getData("text");
+    console.log(toDropCardIndexes);
+  }
+
   generateFoundationPiles() {
     const foundationPiles = this.state.foundationPiles;
-    const toRenderPiles = Object.keys(foundationPiles).map(foundationPile => {
-      const toRenderPile = foundationPiles[foundationPile].map(card => (
-        <div
-          className="foundation-pile-card"
-          style={{ color: card.color }}
-          dangerouslySetInnerHTML={{
-            __html: `${card.getUnicode()}`
-          }}
-        />
-      ));
-      return <div className="foundation-pile">{toRenderPile}</div>;
-    });
+    const toRenderPiles = Object.keys(foundationPiles).map(
+      (foundationPile, pileIndex) => {
+        const pile = foundationPiles[foundationPile];
+        const toRenderPile = pile.map((card, cardIndex) => (
+          <div
+            id={pileIndex + "_" + cardIndex}
+            draggable={true}
+            onDrop={this.dropOnFoundationPile.bind(this)}
+            onDragStart={this.dragFromFoundationPile.bind(this)}
+            onDragOver={this.allowDrop.bind(this)}
+            className="foundation-pile-card"
+            style={{ color: card.color }}
+            dangerouslySetInnerHTML={{
+              __html: `${card.getUnicode()}`
+            }}
+          />
+        ));
+        return <div className="foundation-pile">{toRenderPile}</div>;
+      }
+    );
     return <div className="foundation-piles">{toRenderPiles}</div>;
   }
 
