@@ -1,7 +1,7 @@
 import React from "react";
 import CardView from "./CardView";
 
-class PilesView extends React.Component {
+class TableuView extends React.Component {
   allowDrop(event) {
     event.preventDefault();
   }
@@ -39,4 +39,4 @@ class PilesView extends React.Component {
   }
 }
 
-export default PilesView;
+export default TableuView;

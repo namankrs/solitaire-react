@@ -1,7 +1,7 @@
 import React from "react";
 import CardView from "./CardView";
 
-class Foundations extends React.Component {
+class FoundationsView extends React.Component {
   allowDrop(event) {
     event.preventDefault();
   }
@@ -44,4 +44,4 @@ class Foundations extends React.Component {
   }
 }
 
-export default Foundations;
+export default FoundationsView;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import deckGenerator from "./deckGenerator";
-import PilesView from "./PilesView";
-import Foundations from "./Foundations";
+import TableauView from "./TableauView";
+import Foundations from "./FoundationsView";
 import WastePilesView from "./WastePilesView";
 
 class GameView extends Component {
@@ -9,6 +9,7 @@ class GameView extends Component {
     super(props);
     this.state = {
       piles: [],
+      //change objects to array
       wastePiles: { 1: [], 2: [] },
       foundationPiles: { 1: [], 2: [], 3: [], 4: [] }
     };
@@ -85,7 +86,7 @@ class GameView extends Component {
             dropOnFoundationPile={this.dropOnFoundationPile.bind(this)}
           />
         </div>
-        <PilesView
+        <TableauView
           piles={this.state.piles}
           dropOnPile={this.dropOnPile.bind(this)}
         />
