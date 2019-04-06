@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import deckGenerator from "./deckGenerator";
 import PilesView from "./PilesView";
-import FoundationPilesView from "./FoundationPilesView";
+import Foundations from "./Foundations";
 import WastePilesView from "./WastePilesView";
 
 class GameView extends Component {
@@ -56,6 +56,7 @@ class GameView extends Component {
 
   handleWastePile(event) {
     const wastePile = this.state.wastePiles[1];
+    if (!wastePile.length) return;
     const faceOnWastePile = this.state.wastePiles[2];
     const clickedCard = wastePile[wastePile.length - 1];
     wastePile.pop();
@@ -79,7 +80,7 @@ class GameView extends Component {
             resetWastePile={this.resetWastePile.bind(this)}
             handleWastePile={this.handleWastePile.bind(this)}
           />
-          <FoundationPilesView
+          <Foundations
             foundationPiles={this.state.foundationPiles}
             dropOnFoundationPile={this.dropOnFoundationPile.bind(this)}
           />
