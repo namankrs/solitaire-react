@@ -9,9 +9,8 @@ class GameView extends Component {
     super(props);
     this.state = {
       piles: [],
-      //change objects to array
-      wastePiles: { 1: [], 2: [] },
-      foundationPiles: { 1: [], 2: [], 3: [], 4: [] }
+      wastePiles: Array(2).fill([]),
+      foundationPiles: Array(4).fill([])
     };
   }
 
@@ -31,7 +30,7 @@ class GameView extends Component {
       }
       piles.push(pile);
     }
-    const wastePiles = { 1: deckCopy, 2: [] };
+    const wastePiles = [deckCopy, []];
     this.setState({ piles: piles, wastePiles: wastePiles });
   }
 
@@ -49,27 +48,27 @@ class GameView extends Component {
   }
 
   resetWastePile() {
-    if (this.state.wastePiles[1].length) return;
-    const faceOnWastePile = this.state.wastePiles[2];
+    if (this.state.wastePiles[0].length) return;
+    const faceOnWastePile = this.state.wastePiles[1];
     faceOnWastePile.reverse();
-    this.setState({ wastePiles: { 1: faceOnWastePile, 2: [] } });
+    this.setState({ wastePiles: [faceOnWastePile, []] });
   }
 
   handleWastePile(event) {
-    const wastePile = this.state.wastePiles[1];
+    const wastePile = this.state.wastePiles[0];
     if (!wastePile.length) return;
-    const faceOnWastePile = this.state.wastePiles[2];
+    const faceOnWastePile = this.state.wastePiles[1];
     const clickedCard = wastePile[wastePile.length - 1];
     wastePile.pop();
     faceOnWastePile.push(clickedCard);
-    this.setState({ wastePiles: { 1: wastePile, 2: faceOnWastePile } });
+    this.setState({ wastePiles: [wastePile, faceOnWastePile] });
   }
 
-  dropOnFoundationPile(event) {
+  dropOnFoundations(event) {
     event.preventDefault();
     const toDropCardIndexes = event.dataTransfer.getData("text");
     console.log(toDropCardIndexes);
-    console.log(event.target.id);
+    console.log(event);
   }
 
   render() {
@@ -83,7 +82,7 @@ class GameView extends Component {
           />
           <Foundations
             foundationPiles={this.state.foundationPiles}
-            dropOnFoundationPile={this.dropOnFoundationPile.bind(this)}
+            dropOnFoundationPile={this.dropOnFoundations.bind(this)}
           />
         </div>
         <TableauView

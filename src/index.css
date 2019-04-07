@@ -47,8 +47,11 @@ code {
 .pile-column {
   display: flex;
   flex-direction: column;
-  width: 150px;
-  height: 100px;
+  width: 120px;
+  height: 150px;
+  border: 1px solid black;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 .waste-pile,

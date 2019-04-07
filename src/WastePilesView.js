@@ -15,12 +15,10 @@ class WastePilesView extends React.Component {
     );
   }
 
-  generatePile(wastePiles, wastePile, pileIndex) {
+  generatePile(wastePile, pileIndex) {
     let onclick = this.props.resetWastePile;
     if (pileIndex === 0) onclick = this.props.handleWastePile;
-    const toRenderPile = wastePiles[wastePile].map(
-      this.generateCard.bind(null, pileIndex)
-    );
+    const toRenderPile = wastePile.map(this.generateCard.bind(null, pileIndex));
     return (
       <div onClick={onclick} className="waste-pile">
         {toRenderPile}
@@ -30,9 +28,7 @@ class WastePilesView extends React.Component {
 
   render() {
     const wastePiles = this.props.wastePiles;
-    const toRenderWastePiles = Object.keys(wastePiles).map(
-      this.generatePile.bind(this, wastePiles)
-    );
+    const toRenderWastePiles = wastePiles.map(this.generatePile.bind(this));
     return <div className="waste-piles">{toRenderWastePiles}</div>;
   }
 }

@@ -11,7 +11,6 @@ class FoundationsView extends React.Component {
       <CardView
         id={pileIndex + "_" + cardIndex}
         draggable={true}
-        onDragStart={this.dragFromFoundationPile.bind(this)}
         className="foundation-pile-card"
         card={card}
       />
@@ -23,7 +22,7 @@ class FoundationsView extends React.Component {
       <div
         id={pileIndex}
         onDragOver={this.allowDrop.bind(this)}
-        onDrop={this.props.dropOnFoundationPile}
+        onDrop={this.props.dropOnFoundations}
         className="foundation-pile"
       >
         {toRenderPile}
@@ -33,13 +32,12 @@ class FoundationsView extends React.Component {
 
   render() {
     const foundationPiles = this.props.foundationPiles;
-    const toRenderPiles = Object.keys(foundationPiles).map(
-      (foundationPile, pileIndex) => {
-        const pile = foundationPiles[foundationPile];
-        const toRenderPile = pile.map(this.generateCard.bind(null, pileIndex));
-        return this.generateFoundation(pileIndex, toRenderPile);
-      }
-    );
+    const toRenderPiles = foundationPiles.map((foundationPile, pileIndex) => {
+      const toRenderPile = foundationPile.map(
+        this.generateCard.bind(null, pileIndex)
+      );
+      return this.generateFoundation(pileIndex, toRenderPile);
+    });
     return <div className="foundation-piles">{toRenderPiles}</div>;
   }
 }
