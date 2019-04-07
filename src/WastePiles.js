@@ -4,10 +4,15 @@ import Card from "./Card";
 
 class WastePiles extends React.Component {
   generateCard(pileIndex, card, cardIndex) {
-    if (pileIndex === 0) card = new Card(null, "black", null, "&#x1F0A0");
+    let draggable = true;
+    if (pileIndex === 0) {
+      card = new Card(null, "black", null, "&#x1F0A0");
+      draggable = false;
+    }
     return (
       <CardView
         id={cardIndex}
+        draggable={draggable}
         onClick={onclick}
         className="waste-pile-card"
         card={card}
