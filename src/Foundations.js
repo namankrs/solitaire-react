@@ -1,7 +1,7 @@
 import React from "react";
 import CardView from "./CardView";
 
-class FoundationsView extends React.Component {
+class Foundations extends React.Component {
   allowDrop(event) {
     event.preventDefault();
   }
@@ -22,7 +22,7 @@ class FoundationsView extends React.Component {
       <div
         id={pileIndex}
         onDragOver={this.allowDrop.bind(this)}
-        onDrop={this.props.dropOnFoundations}
+        onDrop={this.props.dropOnFoundations.bind(null, pileIndex)}
         className="foundation-pile"
       >
         {toRenderPile}
@@ -42,4 +42,4 @@ class FoundationsView extends React.Component {
   }
 }
 
-export default FoundationsView;
+export default Foundations;

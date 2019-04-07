@@ -2,12 +2,12 @@ import React from "react";
 import CardView from "./CardView";
 import Card from "./Card";
 
-class WastePilesView extends React.Component {
+class WastePiles extends React.Component {
   generateCard(pileIndex, card, cardIndex) {
     if (pileIndex === 0) card = new Card(null, "black", null, "&#x1F0A0");
     return (
       <CardView
-        id={pileIndex + "_" + cardIndex}
+        id={cardIndex}
         onClick={onclick}
         className="waste-pile-card"
         card={card}
@@ -33,4 +33,4 @@ class WastePilesView extends React.Component {
   }
 }
 
-export default WastePilesView;
+export default WastePiles;

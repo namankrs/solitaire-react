@@ -4,7 +4,7 @@ import { shallow } from "enzyme";
 import sinon from "sinon";
 
 import GameView from "./GameView";
-import TableauView from "./TableauView";
+import TableauView from "./Tableau";
 import CardView from "./CardView";
 import Foundations from "./FoundationsView";
 
