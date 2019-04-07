@@ -10,7 +10,6 @@ class Foundations extends React.Component {
     return (
       <CardView
         id={pileIndex + "_" + cardIndex}
-        draggable={true}
         className="foundation-pile-card"
         card={card}
       />

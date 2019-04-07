@@ -1,7 +1,7 @@
 import React from "react";
 import CardView from "./CardView";
 
-class TableuView extends React.Component {
+class TableauView extends React.Component {
   allowDrop(event) {
     event.preventDefault();
   }
@@ -39,4 +39,4 @@ class TableuView extends React.Component {
   }
 }
 
-export default TableuView;
+export default TableauView;
