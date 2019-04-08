@@ -47,6 +47,7 @@ class Game extends Component {
     if (!wastePile.length) return;
     const faceOnWastePile = this.state.wastePiles[1];
     const clickedCard = wastePile[wastePile.length - 1];
+    clickedCard.open();
     wastePile.pop();
     faceOnWastePile.push(clickedCard);
     this.setState({ wastePiles: [wastePile, faceOnWastePile] });
