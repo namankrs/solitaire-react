@@ -51,16 +51,14 @@ class Game extends Component {
     this.setState({ wastePiles: [wastePile, faceOnWastePile] });
   }
 
-  dropOnPile(pileIndex, event) {
-    event.preventDefault();
-    const toDropCardIndexes = event.dataTransfer.getData("text").split("_");
-    const piles = this.state.piles;
-    if (toDropCardIndexes.length === 1) {
-      const wastePiles = this.state.wastePiles;
-      const draggedCard = wastePiles[1].pop();
-      piles[pileIndex].push(draggedCard);
-      return this.setState({ piles: piles, wastePiles: wastePiles });
-    }
+  _dropOnPileFromWaste(piles, pileIndex) {
+    const wastePiles = this.state.wastePiles;
+    const draggedCard = wastePiles[1].pop();
+    piles[pileIndex].push(draggedCard);
+    this.setState({ piles: piles, wastePiles: wastePiles });
+  }
+
+  _dropOnPileFromPile(toDropCardIndexes, piles, pileIndex) {
     const dragPileIndex = toDropCardIndexes[0];
     const dragCardIndex = toDropCardIndexes[1];
     const draggedCards = piles[dragPileIndex].slice(dragCardIndex);
@@ -70,19 +68,31 @@ class Game extends Component {
     this.setState({ piles: piles });
   }
 
-  dropOnFoundations(foundationIndex, event) {
+  dropOnPile(pileIndex, event) {
     event.preventDefault();
     const toDropCardIndexes = event.dataTransfer.getData("text").split("_");
-    const foundationPiles = this.state.foundationPiles;
+    const piles = this.state.piles;
     if (toDropCardIndexes.length === 1) {
-      const wastePiles = this.state.wastePiles;
-      const draggedCard = wastePiles[1].pop();
-      foundationPiles[foundationIndex].push(draggedCard);
-      return this.setState({
-        foundationPiles: foundationPiles,
-        wastePiles: wastePiles
-      });
+      return this._dropOnPileFromWaste(piles, pileIndex);
     }
+    this._dropOnPileFromPile(toDropCardIndexes, piles, pileIndex);
+  }
+
+  _dropOnFoundationFromWaste(foundationPiles, foundationIndex) {
+    const wastePiles = this.state.wastePiles;
+    const draggedCard = wastePiles[1].pop();
+    foundationPiles[foundationIndex].push(draggedCard);
+    this.setState({
+      foundationPiles: foundationPiles,
+      wastePiles: wastePiles
+    });
+  }
+
+  _dropOnFoundationFromPile(
+    toDropCardIndexes,
+    foundationPiles,
+    foundationIndex
+  ) {
     const piles = this.state.piles;
     const pileIndex = toDropCardIndexes[0];
     const cardIndex = toDropCardIndexes[1];
@@ -91,6 +101,20 @@ class Game extends Component {
     foundationPiles[foundationIndex].push(card);
     piles[pileIndex].pop();
     this.setState({ piles: piles, foundationPiles: foundationPiles });
+  }
+
+  dropOnFoundations(foundationIndex, event) {
+    event.preventDefault();
+    const toDropCardIndexes = event.dataTransfer.getData("text").split("_");
+    const foundationPiles = this.state.foundationPiles;
+    if (toDropCardIndexes.length === 1) {
+      return this._dropOnFoundationFromWaste(foundationPiles, foundationIndex);
+    }
+    this._dropOnFoundationFromPile(
+      toDropCardIndexes,
+      foundationPiles,
+      foundationIndex
+    );
   }
 
   render() {
