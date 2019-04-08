@@ -10,7 +10,7 @@ class TableauView extends React.Component {
     return (
       <CardView
         id={pileIndex + "_" + cardIndex}
-        draggable={true}
+        draggable={card.draggable()}
         className="card"
         card={card}
       />

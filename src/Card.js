@@ -4,10 +4,20 @@ class Card {
     this.color = color;
     this.number = number;
     this.unicode = unicode;
+    this.isOpen = false;
   }
 
   getUnicode() {
-    return this.unicode;
+    if (this.isOpen) return this.unicode;
+    return "&#x1F0A0";
+  }
+
+  open() {
+    this.isOpen = true;
+  }
+
+  draggable() {
+    return this.isOpen;
   }
 }
 

@@ -28,6 +28,7 @@ class Game extends Component {
         pile.push(deckCopy[0]);
         deckCopy.shift();
       }
+      pile[pileCount - 1].open();
       piles.push(pile);
     }
     const wastePiles = [deckCopy, []];
@@ -63,6 +64,7 @@ class Game extends Component {
     const dragCardIndex = toDropCardIndexes[1];
     const draggedCards = piles[dragPileIndex].slice(dragCardIndex);
     const remainingCards = piles[dragPileIndex].slice(0, dragCardIndex);
+    remainingCards.length && remainingCards[remainingCards.length - 1].open();
     piles[dragPileIndex] = remainingCards;
     piles[pileIndex] = piles[pileIndex].concat(draggedCards);
     this.setState({ piles: piles });
@@ -96,10 +98,12 @@ class Game extends Component {
     const piles = this.state.piles;
     const pileIndex = toDropCardIndexes[0];
     const cardIndex = toDropCardIndexes[1];
-    if (piles[pileIndex].length !== +cardIndex + 1) return;
+    const pileLength = piles[pileIndex].length;
+    if (pileLength !== +cardIndex + 1) return;
     const card = piles[pileIndex][cardIndex];
     foundationPiles[foundationIndex].push(card);
     piles[pileIndex].pop();
+    pileLength - 1 && piles[pileIndex][pileLength - 2].open();
     this.setState({ piles: piles, foundationPiles: foundationPiles });
   }
 
