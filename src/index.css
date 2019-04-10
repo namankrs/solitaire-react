@@ -15,18 +15,10 @@ code {
 }
 
 .top-layer {
+  padding: 20px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
-}
-
-.foundation-pile {
-  display: flex;
-  justify-content: center;
-  font-size: 150px;
-  margin: 2px;
-  height: 180px;
-  width: 150px;
-  border: 1px solid black;
 }
 
 .waste-piles {
@@ -41,35 +33,49 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 100px;
+  margin-top: 200px;
 }
 
 .pile-column {
   display: flex;
   flex-direction: column;
-  width: 120px;
-  height: 150px;
+  width: 100px;
+  height: 50px;
   border: 1px solid black;
-  padding-top: 10px;
-  padding-left: 10px;
+  border-radius: 4%;
+  margin-top: -100px;
+  padding-top: 100px;
 }
 
 .waste-pile,
 .faced-up-waste-pile {
   display: flex;
   justify-content: center;
-  font-size: 185px;
+  font-size: 160px;
   margin: 2px;
-  height: 180px;
-  width: 150px;
+  height: 150px;
+  width: 110px;
+  border: 1px solid black;
+  border-radius: 4%;
+}
+
+.foundation-pile {
+  border-radius: 4%;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  font-size: 160px;
+  margin: 2px;
+  height: 150px;
+  width: 110px;
   border: 1px solid black;
 }
 
 .card {
-  font-size: 185px;
-  height: 180px;
-  width: 150px;
-  margin: -30px;
+  font-size: 160px;
+  height: 150px;
+  width: 120px;
+  margin-top: -100px;
   background: whitesmoke;
   border: 1px solid black;
   display: flex;
@@ -77,14 +83,16 @@ code {
   justify-content: center;
   border-radius: 4%;
   user-select: none;
+  padding-bottom: 20px;
 }
 
 .foundation-pile-card,
 .waste-pile-card {
   position: absolute;
-  clip: rect(40px, 130px, 210px, 5px);
+  clip: rect(40px, 120px, 190px, 0px);
   background: whitesmoke;
   border: 1px solid black;
-  margin-top: -30px;
+  margin-top: -40px;
   user-select: none;
+  border-radius: 4%;
 }
