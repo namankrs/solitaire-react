@@ -3,6 +3,7 @@ import deckGenerator from "./deckGenerator";
 import Tableau from "./Tableau";
 import Foundations from "./Foundations";
 import WastePiles from "./WastePiles";
+import { last } from "lodash";
 
 class Game extends Component {
   constructor(props) {
@@ -83,12 +84,20 @@ class Game extends Component {
 
   _dropOnFoundationFromWaste(foundationPiles, foundationIndex) {
     const wastePiles = this.state.wastePiles;
-    const draggedCard = wastePiles[1].pop();
+    const draggedCard = last(wastePiles[1]);
+    if (!this._canBeDroppedOnFoundation(draggedCard, foundationIndex)) return;
     foundationPiles[foundationIndex].push(draggedCard);
+    wastePiles[1].pop();
     this.setState({
       foundationPiles: foundationPiles,
       wastePiles: wastePiles
     });
+  }
+
+  _canBeDroppedOnFoundation(card, foundationIndex) {
+    const lastCard = last(this.state.foundationPiles[foundationIndex]);
+    if (!lastCard) return card.isAce();
+    return lastCard.canBePlacedForFoundation(card);
   }
 
   _dropOnFoundationFromPile(
@@ -102,6 +111,7 @@ class Game extends Component {
     const pileLength = piles[pileIndex].length;
     if (pileLength !== +cardIndex + 1) return;
     const card = piles[pileIndex][cardIndex];
+    if (!this._canBeDroppedOnFoundation(card, foundationIndex)) return;
     foundationPiles[foundationIndex].push(card);
     piles[pileIndex].pop();
     pileLength - 1 && piles[pileIndex][pileLength - 2].open();

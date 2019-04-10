@@ -19,6 +19,18 @@ class Card {
   draggable() {
     return this.isOpen;
   }
+
+  isAce() {
+    return this.number === 1;
+  }
+
+  canBePlacedForFoundation(card) {
+    return (
+      this.number < card.number &&
+      this.color === card.color &&
+      this.suite === card.suite
+    );
+  }
 }
 
 export default Card;

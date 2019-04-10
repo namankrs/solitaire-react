@@ -1,5 +1,6 @@
 import React from "react";
 import CardView from "./CardView";
+import Card from "./Card";
 
 class Foundations extends React.Component {
   allowDrop(event) {
@@ -19,7 +20,7 @@ class Foundations extends React.Component {
   generateFoundation(pileIndex, toRenderPile) {
     return (
       <div
-        id={pileIndex}
+        id={"foundation_" + pileIndex}
         onDragOver={this.allowDrop.bind(this)}
         onDrop={this.props.dropOnFoundations.bind(null, pileIndex)}
         className="foundation-pile"
@@ -32,7 +33,8 @@ class Foundations extends React.Component {
   render() {
     const foundationPiles = this.props.foundationPiles;
     const toRenderPiles = foundationPiles.map((foundationPile, pileIndex) => {
-      const toRenderPile = foundationPile.map(
+      const toProcessPile = foundationPile.slice();
+      const toRenderPile = toProcessPile.map(
         this.generateCard.bind(null, pileIndex)
       );
       return this.generateFoundation(pileIndex, toRenderPile);
