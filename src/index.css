@@ -96,3 +96,9 @@ code {
   user-select: none;
   border-radius: 4%;
 }
+
+.winning-message {
+  font-size: 100px;
+  color: yellow;
+  visibility: hidden;
+}

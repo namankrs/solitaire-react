@@ -122,7 +122,16 @@ class Game extends Component {
     );
   }
 
+  hasWon() {
+    const foundationCards = this.state.foundationPiles.reduce((a, b) =>
+      a.concat(b)
+    );
+    if (foundationCards.length === 52)
+      document.getElementById("winning-message").style.visibility = "visible";
+  }
+
   render() {
+    this.hasWon();
     return (
       <div className="container">
         <div className="top-layer">
@@ -131,6 +140,9 @@ class Game extends Component {
             resetWastePile={this.resetWastePile.bind(this)}
             handleWastePile={this.handleWastePile.bind(this)}
           />
+          <div className="winning-message" id="winning-message">
+            YOU WON
+          </div>
           <Foundations
             foundationPiles={this.state.foundationPiles}
             dropOnFoundations={this.dropOnFoundations.bind(this)}
