@@ -24,9 +24,18 @@ class Card {
     return this.number === 1;
   }
 
+  isKing() {
+    return this.number === 13;
+  }
+
+  canBePlacedForPile(card) {
+    console.log(card.number);
+    return this.number === card.number + 1 && this.color != card.color;
+  }
+
   canBePlacedForFoundation(card) {
     return (
-      this.number < card.number &&
+      this.number === card.number - 1 &&
       this.color === card.color &&
       this.suite === card.suite
     );

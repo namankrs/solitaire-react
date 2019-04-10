@@ -54,9 +54,17 @@ class Game extends Component {
     this.setState({ wastePiles: [wastePile, faceOnWastePile] });
   }
 
+  _canBePlayedOnPile(card, pileIndex) {
+    const lastCard = last(this.state.piles[pileIndex]);
+    if (!lastCard) return card.isKing();
+    return lastCard.canBePlacedForPile(card);
+  }
+
   _dropOnPileFromWaste(piles, pileIndex) {
     const wastePiles = this.state.wastePiles;
-    const draggedCard = wastePiles[1].pop();
+    const draggedCard = last(wastePiles[1]);
+    if (!this._canBePlayedOnPile(draggedCard, pileIndex)) return;
+    wastePiles[1].pop();
     piles[pileIndex].push(draggedCard);
     this.setState({ piles: piles, wastePiles: wastePiles });
   }
@@ -65,6 +73,7 @@ class Game extends Component {
     const dragPileIndex = toDropCardIndexes[0];
     const dragCardIndex = toDropCardIndexes[1];
     const draggedCards = piles[dragPileIndex].slice(dragCardIndex);
+    if (!this._canBePlayedOnPile(draggedCards[0], pileIndex)) return;
     const remainingCards = piles[dragPileIndex].slice(0, dragCardIndex);
     remainingCards.length && remainingCards[remainingCards.length - 1].open();
     piles[dragPileIndex] = remainingCards;
