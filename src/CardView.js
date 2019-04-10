@@ -16,7 +16,7 @@ class CardView extends Component {
         onDragStart={this.drag.bind(this)}
         className={className}
         onClick={onClick}
-        style={{ color: card.color }}
+        style={{ color: card.getColor() }}
         dangerouslySetInnerHTML={{
           __html: `${card.getUnicode()}`
         }}

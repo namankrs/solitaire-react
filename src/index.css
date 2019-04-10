@@ -1,5 +1,18 @@
+html {
+  /* background: linear-gradient(
+    to right,
+    #303030,
+    #303030,
+    #101010,
+    #202020,
+    #303030
+  ); */
+  background: #333;
+  width: 100%;
+  height: 100%;
+}
+
 body {
-  background: green;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -19,6 +32,7 @@ code {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  border-bottom: 5px groove rgb(196, 196, 196);
 }
 
 .waste-piles {
@@ -41,7 +55,7 @@ code {
   flex-direction: column;
   width: 100px;
   height: 50px;
-  border: 1px solid black;
+  border: 1px solid rgb(196, 196, 196);
   border-radius: 4%;
   margin-top: -100px;
   padding-top: 100px;
@@ -52,10 +66,10 @@ code {
   display: flex;
   justify-content: center;
   font-size: 160px;
-  margin: 2px;
+  margin: 5px;
   height: 150px;
   width: 110px;
-  border: 1px solid black;
+  border: 1px solid rgb(196, 196, 196);
   border-radius: 4%;
 }
 
@@ -65,10 +79,10 @@ code {
   display: flex;
   justify-content: center;
   font-size: 160px;
-  margin: 2px;
+  margin: 5px;
   height: 150px;
   width: 110px;
-  border: 1px solid black;
+  border: 1px solid rgb(196, 196, 196);
 }
 
 .card {
@@ -77,13 +91,14 @@ code {
   width: 120px;
   margin-top: -100px;
   background: whitesmoke;
-  border: 1px solid black;
+  box-shadow: 0px 0px 3px 1px gray;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4%;
   user-select: none;
   padding-bottom: 20px;
+  cursor: pointer;
 }
 
 .foundation-pile-card,
@@ -91,7 +106,8 @@ code {
   position: absolute;
   clip: rect(40px, 120px, 190px, 0px);
   background: whitesmoke;
-  border: 1px solid black;
+  box-shadow: 0px 0px 3px 1px gray;
+
   margin-top: -40px;
   user-select: none;
   border-radius: 4%;
@@ -99,6 +115,6 @@ code {
 
 .winning-message {
   font-size: 100px;
-  color: yellow;
+  color: rgb(196, 196, 196);
   visibility: hidden;
 }

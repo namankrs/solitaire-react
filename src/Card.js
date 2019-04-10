@@ -7,6 +7,11 @@ class Card {
     this.isOpen = false;
   }
 
+  getColor() {
+    if (this.isOpen) return this.color;
+    return "black";
+  }
+
   getUnicode() {
     if (this.isOpen) return this.unicode;
     return "&#x1F0A0";
@@ -29,7 +34,6 @@ class Card {
   }
 
   canBePlacedForPile(card) {
-    console.log(card.number);
     return this.number === card.number + 1 && this.color != card.color;
   }
 
