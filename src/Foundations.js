@@ -1,6 +1,5 @@
 import React from "react";
 import CardView from "./CardView";
-import Card from "./Card";
 
 class Foundations extends React.Component {
   allowDrop(event) {

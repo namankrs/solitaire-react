@@ -34,7 +34,7 @@ class Card {
   }
 
   canBePlacedForPile(card) {
-    return this.number === card.number + 1 && this.color != card.color;
+    return this.number === card.number + 1 && this.color !== card.color;
   }
 
   canBePlacedForFoundation(card) {
