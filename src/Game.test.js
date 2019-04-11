@@ -1,22 +1,22 @@
 import React from "react";
 import { expect } from "chai";
-import { shallow } from "enzyme";
+import { shallow, render } from "enzyme";
 import sinon from "sinon";
 
-import GameView from "./GameView";
-import TableauView from "./Tableau";
+import Game from "./Game";
+import Tableau from "./Tableau";
 import CardView from "./CardView";
-import Foundations from "./FoundationsView";
+import Foundations from "./Foundations";
 
-describe("< GameView/>", function() {
+describe("< Game/>", function() {
   it("renders without crashing", function() {
-    shallow(<GameView />);
+    shallow(<Game />);
   });
 });
 
 describe("< GameView", function() {
   it("should render 1 <TableuView />", function() {
-    const wrapper = shallow(<GameView />);
-    expect(wrapper.find(<TableauView />).exists()).to.equal(true);
+    const wrapper = shallow(<Game />);
+    expect(wrapper.exists(".container")).to.equal(true);
   });
 });
