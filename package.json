@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "gh-pages": "^2.0.1",
-    "homepage": "https://namankrs.github.io/solitaire-react/.",
+    "homepage": "https://namankrs.github.io/solitaire-react/",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
