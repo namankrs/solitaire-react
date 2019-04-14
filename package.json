@@ -7,7 +7,6 @@
     "npm":"6.4.0"
   },
   "dependencies": {
-    "homepage": "https: //namankrs.github.io/solitaire-react/ ",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
