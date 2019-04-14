@@ -2,6 +2,10 @@
   "name": "solitaire-react",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node":"8.12.0",
+    "npm":"6.4.0"
+  },
   "dependencies": {
     "homepage": "https: //namankrs.github.io/solitaire-react/ ",
     "react": "^16.8.6",
