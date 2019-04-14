@@ -1,11 +1,9 @@
-
-  {
+{
   "name": "solitaire-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "gh-pages": "^2.0.1",
-    "homepage":  "https: //namankrs.github.io/solitaire-react/ ",
+    "homepage": "https: //namankrs.github.io/solitaire-react/ ",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
@@ -30,6 +28,7 @@
   "devDependencies": {
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
+    "gh-pages": "^2.0.1",
     "react-redux": "^7.0.2",
     "redux": "^4.0.1",
     "sinon": "^7.3.1"
