@@ -1,3 +1,3 @@
 ## Welcome
 
-To play goto: https://namankrs.github.io/solitaire-react/
+To play go to: https://namankrs.github.io/solitaire-react/
